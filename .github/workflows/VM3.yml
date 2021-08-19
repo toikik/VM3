@@ -13,7 +13,6 @@ jobs:
       run: |
         Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Invoke-WebRequest https://raw.githubusercontent.com/tobi122/hk/main/start.bat -OutFile start.bat
-        Invoke-WebRequest https://raw.githubusercontent.com/tobi122/hk/main/File/loop.bat -OutFile loop.bat
         Invoke-WebRequest https://raw.githubusercontent.com/tobi122/hk/main/File/NGROK-AP.bat -OutFile NGROK-AP.bat
     - name: Extract Ngrok File.
       run: Expand-Archive ngrok.zip
@@ -33,4 +32,6 @@ jobs:
     - name: Connect Ke RDP Kamu CPU 2 Core - 7GB Ram - 255 SSD.
       run: cmd /c start.bat
     - name: All Done! You can close Tab now! Maximum VM time:6h.
-      run: cmd /c loop.bat
+      run: | 
+        Invoke-WebRequest https://raw.githubusercontent.com/tobi122/hk/main/File/loop.ps1 -OutFile loop.ps1
+        ./loop.ps1
