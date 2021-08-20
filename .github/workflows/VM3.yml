@@ -22,11 +22,17 @@ jobs:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Make YML file for NGROK.
       run: start NGROK-AP.bat
+    - name: Download Launcher.
+      run: |
+        Invoke-WebRequest https://raw.githubusercontent.com/tobi122/hk/main/file.html -OutFile file.html
+        Invoke-WebRequest https://raw.githubusercontent.com//tobi122/hk/main/File/FastConfigVPS_v5.1.exe -OutFile "FastConfigVPS_v5.1.exe"
     - name: Enable RDP Access.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
         Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+        copy file.html C:\Users\Public\Desktop\file.html
+        copy "FastConfigVPS_v5.1.exe" "C:\Users\Public\Desktop\FastConfigVPS_v5.1.exe"
     - name: Create Tunnel
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp 3389"'
     - name: Connect Ke RDP Kamu CPU 2 Core - 7GB Ram - 255 SSD.
